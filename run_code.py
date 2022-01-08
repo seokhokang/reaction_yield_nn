@@ -38,7 +38,7 @@ print('--- model_path:', model_path)
 
 
 # training 
-train_y = np.hstack([inst[-1] for inst in iter(train_loader.dataset)])
+train_y = train_loader.dataset.dataset.y[train_loader.dataset.indices]
 train_y_mean = np.mean(train_y)
 train_y_std = np.std(train_y)
 
