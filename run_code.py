@@ -56,7 +56,7 @@ else:
 
 
 # inference
-test_y = np.hstack([inst[-1] for inst in iter(test_loader.dataset)])
+test_y = test_loader.dataset.dataset.y[test_loader.dataset.indices]
 
 test_y_pred, test_y_epistemic, test_y_aleatoric = inference(net, test_loader, train_y_mean, train_y_std)
 test_y_pred = np.clip(test_y_pred, 0, 100)
