@@ -148,7 +148,7 @@ def training(net, train_loader, val_loader, train_y_mean, train_y_std, val_monit
         # validation
         if val_loader is not None and (epoch + 1) % val_monitor_epoch == 0:
             
-            val_y = np.hstack([inst[-1] for inst in iter(val_loader.dataset)])
+            val_y = val_loader.dataset.dataset.y[val_loader.dataset.indices]
             val_y_pred, _, _ = inference(net, val_loader, train_y_mean, train_y_std, n_forward_pass = n_forward_pass)
 
             result = [mean_absolute_error(val_y, val_y_pred),
