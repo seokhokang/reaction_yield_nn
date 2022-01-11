@@ -20,3 +20,14 @@ PyTorch implementation of the model described in the paper [Uncertainty-Aware Pr
 - **RDKit**
 
 ## Citation
+```
+@Article{Kwon2022,
+  title={Uncertainty-aware prediction of chemical reaction yields with graph neural networks},
+  author={Kwon, Youngchun and Lee, Dongseon and Choi, Youn-Suk and Kang, Seokho},
+  journal={Journal of Cheminformatics},
+  volume={14},
+  pages={2},
+  year={2022},
+  doi={10.1186/s13321-021-00579-z}
+}
+```
