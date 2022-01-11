@@ -1,5 +1,5 @@
 # reaction_yield_nn
-PyTorch implementation of the model described in the paper [Uncertainty-Aware Prediction of Chemical Reaction Yields with Graph Neural Networks](#)
+PyTorch implementation of the model described in the paper [Uncertainty-Aware Prediction of Chemical Reaction Yields with Graph Neural Networks](https://doi.org/10.1186/s13321-021-00579-z)
 
 ## Components
 - **data/*** - dataset files used
