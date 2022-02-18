@@ -160,7 +160,7 @@ def get_graph_data(rsmi_list, yld_list, data_id, filename):
         
         # processing products
         products_smi_list = products_smi.split('.')
-        for _ in range(rmol_max_cnt - len(reactants_smi_list)): reactants_smi_list.append('') 
+        for _ in range(pmol_max_cnt - len(products_smi_list)): products_smi_list.append('') 
         for j, smi in enumerate(products_smi_list):
             if smi == '':
                 pmol_dict[j] = add_dummy(pmol_dict[j])
