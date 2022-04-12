@@ -20,7 +20,8 @@ train_size = 2767 #data_id 1: [2767, 1977, 1186, 791, 395, 197, 98], data_id 2: 
 batch_size = 128
 use_saved = False
 model_path = './model/model_%d_%d_%d.pt' %(data_id, split_id, train_size)
-
+if not os.path.exists('./model/'): os.makedirs('./model/')
+        
 data = GraphDataset(data_id, split_id)
 frac_split = (train_size + 1e-5)/len(data)
 train_set, test_set = split_dataset(data, [frac_split, 1 - frac_split], shuffle=False)
@@ -38,7 +39,7 @@ print('--- model_path:', model_path)
 
 
 # training 
-train_y = train_loader.dataset.dataset.y[train_loader.dataset.indices]
+train_y = train_loader.dataset.dataset.yld[train_loader.dataset.indices]
 train_y_mean = np.mean(train_y)
 train_y_std = np.std(train_y)
 
@@ -56,7 +57,7 @@ else:
 
 
 # inference
-test_y = test_loader.dataset.dataset.y[test_loader.dataset.indices]
+test_y = test_loader.dataset.dataset.yld[test_loader.dataset.indices]
 
 test_y_pred, test_y_epistemic, test_y_aleatoric = inference(net, test_loader, train_y_mean, train_y_std)
 test_y_pred = np.clip(test_y_pred, 0, 100)
