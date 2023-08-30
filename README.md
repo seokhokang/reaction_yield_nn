@@ -3,6 +3,7 @@ PyTorch implementation of the model described in the paper [Uncertainty-Aware Pr
 
 ## Components
 - **data/*** - dataset files used
+- **data/get_data.py** - script for dataset file generation
 - **model/*** - model files used
 - **run_code.py** - script for model training/evaluation
 - **dataset.py** - data structure & functions
