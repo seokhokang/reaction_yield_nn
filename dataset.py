@@ -16,9 +16,11 @@ class GraphDataset():
     def load(self):
         
         if self._data_id in [1, 2]:
-            [rmol_dict, pmol_dict, reaction_dict] = np.load('./data/dataset_%d_%d.npz' %(self._data_id, self._split_id), allow_pickle=True)['data']
+            data = np.load('./data/dataset_%d_%d.npz' %(self._data_id, self._split_id), allow_pickle=True)
         elif self._data_id == 3:
-            [rmol_dict, pmol_dict, reaction_dict] = np.load('./data/test_%d.npz' %self._split_id, allow_pickle=True)['data']
+            data = np.load('./data/test_%d.npz' %self._split_id, allow_pickle=True)
+        
+        rmol_dict, pmol_dict, reaction_dict = data['rmol'], data['pmol'], data['reaction'][0]
     
         self.rmol_max_cnt = len(rmol_dict)
         self.pmol_max_cnt = len(pmol_dict)
@@ -36,7 +38,7 @@ class GraphDataset():
         self.pmol_edge_attr = [pmol_dict[j]['edge_attr'] for j in range(self.pmol_max_cnt)]
         self.pmol_src = [pmol_dict[j]['src'] for j in range(self.pmol_max_cnt)]
         self.pmol_dst = [pmol_dict[j]['dst'] for j in range(self.pmol_max_cnt)]
-        
+
         self.yld = reaction_dict['yld']
         self.rsmi = reaction_dict['rsmi']
 

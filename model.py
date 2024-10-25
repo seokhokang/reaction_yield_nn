@@ -80,16 +80,19 @@ class reactionMPNN(nn.Module):
         super(reactionMPNN, self).__init__()
 
         self.mpnn = MPNN(node_in_feats, edge_in_feats)
-
+        
         self.predict = nn.Sequential(
             nn.Linear(readout_feats * 2, predict_hidden_feats), nn.PReLU(), nn.Dropout(prob_dropout),
             nn.Linear(predict_hidden_feats, predict_hidden_feats), nn.PReLU(), nn.Dropout(prob_dropout),
             nn.Linear(predict_hidden_feats, 2)
         )
-    
+
     def forward(self, rmols, pmols):
 
-        r_graph_feats = torch.sum(torch.stack([self.mpnn(mol) for mol in rmols]), 0)
+        assert len(pmols) == 1
+        r_mol_mask = torch.stack([mol.batch_num_nodes() > 0 for mol in rmols]).unsqueeze(2)
+        
+        r_graph_feats = torch.sum(torch.stack([self.mpnn(mol) for mol in rmols]) * r_mol_mask, 0)
         p_graph_feats = torch.sum(torch.stack([self.mpnn(mol) for mol in pmols]), 0)
 
         concat_feats = torch.cat([r_graph_feats, p_graph_feats], 1)

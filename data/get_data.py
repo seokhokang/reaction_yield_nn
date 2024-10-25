@@ -87,9 +87,9 @@ def get_graph_data(rsmi_list, yld_list, data_id, filename):
 
     def add_dummy(mol_dict):
 
-        n_node = 1
+        n_node = 0
         n_edge = 0
-        node_attr = np.zeros((1, len(atom_list) + len(charge_list) + len(degree_list) + len(hybridization_list) + len(hydrogen_list) + len(valence_list) + len(ringsize_list) + 1))
+        node_attr = np.empty((0, len(atom_list) + len(charge_list) + len(degree_list) + len(hybridization_list) + len(hydrogen_list) + len(valence_list) + len(ringsize_list) + 1))
     
         mol_dict['n_node'].append(n_node)
         mol_dict['n_edge'].append(n_edge)
@@ -187,7 +187,7 @@ def get_graph_data(rsmi_list, yld_list, data_id, filename):
     reaction_dict['yld'] = np.array(reaction_dict['yld'])
     
     # save file
-    np.savez_compressed(filename, data = [rmol_dict, pmol_dict, reaction_dict]) 
+    np.savez_compressed(filename, rmol = rmol_dict, pmol = pmol_dict, reaction = [reaction_dict]) 
 
     
 if __name__ == "__main__":
